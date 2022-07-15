@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Create Dynamic Form Using JavaScript</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    input {
+      padding: 5px;
+      margin: 5px;
+    }
+
+    #main_tbl {
+      margin-top: 5%;
+      background-color: white;
+      border: 4px solid #00c431;
+    }
+
+    #total {
+      text-align: center;
+    }
+
+    h3 {
+      font-weight: bold;
+      background-color: #00c431;
+      color: white;
+      text-align: center;
+      padding: 5px;
+    }
+
+    body {
+      background-color: #dae7ff;
+    }
+  </style>
+
+
+</head>
+
+
+
+
+<body>
+
+  <div class="container">
+
+    <table width="50%" border="0" align="center" id="main_tbl">
+      <tr>
+        <td>
+
+
+          <form action="index.html" method="post" autocomplete="off">
+
+            <table>
+              <tr>
+                <td colspan="3">
+                  <h3>Create Dynamic Form Using JavaScript</h3>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <input type="text" placeholder="Number of inputs..." name="total" id="total"
+                    onchange="generateInputs(this.value)" onkeypress="return isNumberKey(event)"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    maxlength="2" required="" class="form-control" style="margin: 0px;">
+                </td>
+              </tr>
+
+              <tr>
+                <td id="title_inputs" width="10%"></td>
+                <td id="link_inputs" width="10%"></td>
+                <td id="email_inputs" width="10%"></td>
+              </tr>
+
+              <tr>
+                <td colspan="3">
+                  <button type="submit" name="btn_data" id="btn_data" class="btn btn-primary btn-block">Upload
+                    Data</button>
+                </td>
+              </tr>
+            </table>
+
+          </form>
+
+
+        </td>
+      </tr>
+    </table>
+
+
+  </div>
+  <script type="text/javascript">
+    function generateInputs(val) {
+      $("#title_inputs").html("");
+      $("#link_inputs").html("");
+      $("#email_inputs").html("");
+      total_no = val;
+      for (i = 0; total_no > i; i++) {
+        var element1 = document.createElement('input');
+        element1.type = "text";
+        element1.placeholder = "Video Title";
+        element1.name = "title[]";
+        element1.required = "true";
+        element1.id = "abcd";
+        document.getElementById("title_inputs").appendChild(element1);
+
+        var element2 = document.createElement('input');
+        element2.type = "text";
+        element2.placeholder = "Video Link";
+        element2.name = "link[]";
+        element2.required = "true";
+        element2.id = "abcd6";
+        document.getElementById("link_inputs").appendChild(element2);
+
+        var element3 = document.createElement('input');
+        element3.type = "email";
+        element3.placeholder = "Email Id";
+        element3.name = "email[]";
+        element3.required = "true";
+        document.getElementById("email_inputs").appendChild(element3);
+
+      }
+    }
+
+
+
+
+    function isNumberKey(evt) {
+      var charCode = (evt.which) ? evt.which : event.keyCode
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+
+      return true;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Create Form Input Using JavaScript</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    input {
+      padding: 5px;
+      margin: 5px;
+      text-align: center;
+    }
+
+    input[type=text]:read-only {
+      background-color: #efdfb0;
+    }
+
+    h3 {
+      font-weight: bold;
+      background-color: #00c431;
+      color: white;
+      text-align: center;
+      padding: 5px;
+    }
+
+    body {
+      background-color: #dae7ff;
+    }
+  </style>
+
+
+</head>
+
+
+
+
+<body>
+
+  <div class="container">
+
+
+    <form action="test.html" method="post" autocomplete="off" style="margin-top: 5%;">
+
+      <table width="100%" border="0" align="center">
+        <tr>
+          <td colspan="6">
+            <h3>Create Form Input Using JavaScript</h3>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <input type="text" placeholder="Number Of Row..." name="total" id="total"
+              onChange="generateInputs(this.value)" onkeypress="return isNumberKey(event)"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              maxlength="2" required="" class="form-control" style="margin: 0px; border: 3px solid #1183f5;">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="6" align="center" id="all_inputs"></td>
+        </tr>
+
+        <tr>
+          <td align="center" colspan="6">
+            <div class="row">
+              <div class="col-sm-3">
+                <span>Product Name<br>
+                  <input type="text" class="col-sm-9" id="prodicat_name" value="0" name="prodicat_name" readonly>
+                </span>
+              </div>
+              <div class="col-sm-3">
+                <span>Product Price<br>
+                  <input type="text" class="col-sm-9" id="total_price" value="0" name="total_price" readonly>
+                </span>
+              </div>
+              <div class="col-sm-3">
+                <span>Product Quantity<br>
+                  <input type="text" class="col-sm-9" id="total_qua" value="0" name="total_qua" readonly>
+                </span>
+              </div>
+              <div class="col-sm-3">
+                <span>Total Price<br>
+                  <input type="text" class="col-sm-9" id="grand_total" value="0" name="grand_total" readonly>
+                </span>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td colspan="6">
+            <button type="submit" name="btn_data" id="btn_data" class="btn btn-primary btn-block">Upload Data</button>
+          </td>
+        </tr>
+      </table>
+
+    </form>
+
+
+  </div>
+
+  <script type="text/javascript">
+
+    function generateInputs(val) {
+      var total_no = val;
+      for (k = 0; total_no > k; k++) {
+
+
+        var a = Math.floor(Math.random() * 999);
+        var element1 = document.createElement('input');
+        element1.type = "text";
+        element1.placeholder = "Product Name";
+        element1.className = "col-sm-2 col-form-label all_course";
+        element1.name = "Course_Name[]";
+        element1.required = "true";
+        element1.setAttribute("readonly", "true");
+        element1.id = "course_" + a;
+
+        element1.onchange = function () {
+          alert(this.value);
+          alert(this.id);
+        };
+
+
+        var element2 = document.createElement('input');
+        element2.type = "text";
+        element2.placeholder = "Price";
+        element2.className = "col-sm-2 col-form-label all_price";
+        element2.name = "total_price[]";
+        element2.required = "true";
+        element2.setAttribute("readonly", "true");
+        element2.id = "price_" + a;
+        element2.onchange = function () {
+          alert(this.value);
+          alert(this.id);
+        };
+
+
+        var element4 = document.createElement('input');
+        element4.type = "text";
+        element4.placeholder = "Quantity";
+        element4.className = "col-sm-2 col-form-label all_quan";
+        element4.name = "quantity[]";
+        element4.required = "true";
+        element4.id = "quan_" + a;
+        element4.onchange = function () {
+          var qu_value = this.value;
+          var qu_id = this.id;
+          var qu_idvalue = qu_id.split("_");
+          var qu_idno = qu_idvalue[1];
+          var now_quadd = document.getElementById('quan_' + qu_idno).value;
+          var now_price = document.getElementById('price_' + qu_idno).value;
+          if (now_quadd == "0" || now_quadd < "0") {
+            document.getElementById('quan_' + qu_idno).value = "1";
+            qun1();
+          } else {
+            qun2();
+          }
+          function qun1() {
+            var asda = document.getElementById('quan_' + qu_idno).value;
+            document.getElementById('grand_' + qu_idno).value = parseInt(now_price) * parseInt(asda);
+            var quan_sd = document.getElementsByClassName('all_quan');
+            var quan_ssd = 0;
+            for (var f = 0; f < quan_sd.length; f++) {
+              if (parseInt(quan_sd[f].value))
+                quan_ssd += parseInt(quan_sd[f].value);
+            }
+            document.getElementById('total_qua').value = quan_ssd;
+            var grand_too = document.getElementsByClassName('all_total');
+            var grand_sssd = 0;
+            for (var h = 0; h < grand_too.length; h++) {
+              if (parseInt(grand_too[h].value))
+                grand_sssd += parseInt(grand_too[h].value);
+            }
+            document.getElementById('grand_total').value = grand_sssd;
+          }
+
+          function qun2() {
+            document.getElementById('grand_' + qu_idno).value = parseInt(now_price) * parseInt(now_quadd);
+            var quan_sd = document.getElementsByClassName('all_quan');
+            var quan_ssd = 0;
+            for (var f = 0; f < quan_sd.length; f++) {
+              if (parseInt(quan_sd[f].value))
+                quan_ssd += parseInt(quan_sd[f].value);
+            }
+            document.getElementById('total_qua').value = quan_ssd;
+            var grand_too = document.getElementsByClassName('all_total');
+            var grand_sssd = 0;
+            for (var h = 0; h < grand_too.length; h++) {
+              if (parseInt(grand_too[h].value))
+                grand_sssd += parseInt(grand_too[h].value);
+            }
+            document.getElementById('grand_total').value = grand_sssd;
+          }
+
+
+        };
+
+
+        var element5 = document.createElement('input');
+        element5.type = "text";
+        element5.placeholder = "Total Price";
+        element5.className = "col-sm-2 col-form-label all_total";
+        element5.name = "grand_total[]";
+        element5.required = "true";
+        element5.setAttribute("readonly", "true");
+        element5.id = "grand_" + a;
+        element5.onchange = function () {
+          alert(this.value);
+          alert(this.id);
+        };
+
+
+
+        var element6 = document.createElement("select");
+        element6.className = "col-sm-2 col-form-label all_course_select";
+        element6.name = "mySelect[]";
+        element6.id = "select_" + a;
+        element6.onchange = function () {
+          var se_value = this.value;
+          var se_id = this.id;
+          var se_idvalue = se_id.split("_");
+          var se_idno = se_idvalue[1];
+          $.ajax({
+            type: "POST",
+            url: "view.php?method=viewall&id=" + se_value,
+            success: function (data) {
+              var result = JSON.parse(data);
+              var pro_name = result.pname;
+              var pro_mrp = result.pmrp;
+              var pro_price = result.pprice;
+              document.getElementById("course_" + se_idno).value = pro_name;
+              document.getElementById("price_" + se_idno).value = pro_mrp;
+              if (pro_mrp == "0") {
+                document.getElementById('quan_' + se_idno).value = "0";
+              } else {
+                document.getElementById('quan_' + se_idno).value = "1";
+              }
+              var item_s = document.getElementsByClassName('all_price');
+              var total_price = 0;
+              for (var t = 0; t < item_s.length; t++) {
+                if (parseInt(item_s[t].value))
+                  total_price += parseInt(item_s[t].value);
+              }
+              document.getElementById('total_price').value = total_price;
+              var quan_s = document.getElementsByClassName('all_quan');
+              var quan_sss = 0;
+              for (var q = 0; q < quan_s.length; q++) {
+                if (parseInt(quan_s[q].value))
+                  quan_sss += parseInt(quan_s[q].value);
+              }
+              document.getElementById('total_qua').value = quan_sss;
+              var total_quadd = document.getElementById('quan_' + se_idno).value;
+              document.getElementById('grand_' + se_idno).value = parseInt(pro_mrp) * parseInt(total_quadd);
+              var grand_to = document.getElementsByClassName('all_total');
+              var grand_sss = 0;
+              for (var w = 0; w < grand_to.length; w++) {
+                if (parseInt(grand_to[w].value))
+                  grand_sss += parseInt(grand_to[w].value);
+              }
+              document.getElementById('grand_total').value = grand_sss;
+              var allcourses = $('.all_course').map(function () {
+                return $(this).val()
+              }).get();
+              document.getElementById('prodicat_name').value = allcourses;
+            }
+
+          });
+
+        };
+
+
+
+        var array = { "Select Product": "1", "PHP": "2", "JavaScript": "3", "jQurey": "4", "AngularJS": "5", "Angular": "6" }
+        for (var key in array) {
+          var option = document.createElement("option");
+          option.value = array[key];
+          option.text = key;
+          element6.appendChild(option);
+        }
+
+
+        var element3 = document.createElement('input');
+        element3.type = "button";
+        element3.className = "btn btn-danger";
+        element3.value = "Remove";
+        element3.id = element1.id + "," + element2.id + "," + element4.id + "," + element5.id + "," + element6.id;
+        element3.onclick = function () {
+          var btm_id = this.id;
+          const myArr = btm_id.split(",");
+          var type_R = myArr[1];
+          var re_idvalue = type_R.split("_");
+          var get_value = re_idvalue[1];
+          myArr.forEach(myFunction);
+          function myFunction(id, index) {
+            var remove = document.getElementById(id);
+            remove.parentNode.removeChild(remove);
+          }
+          var remove1 = document.getElementById(this.id);
+          remove1.parentNode.removeChild(remove1);
+
+          var price_to = document.getElementsByClassName('all_price');
+          var price_ssss = 0;
+          for (var z = 0; z < price_to.length; z++) {
+            if (parseInt(price_to[z].value))
+              price_ssss += parseInt(price_to[z].value);
+          }
+          document.getElementById('total_price').value = price_ssss;
+
+          var quan_to = document.getElementsByClassName('all_quan');
+          var quan_ssss = 0;
+          for (var c = 0; c < quan_to.length; c++) {
+            if (parseInt(quan_to[c].value))
+              quan_ssss += parseInt(quan_to[c].value);
+          }
+          document.getElementById('total_qua').value = quan_ssss;
+
+          var grand_to = document.getElementsByClassName('all_total');
+          var grand_ssss = 0;
+          for (var t = 0; t < grand_to.length; t++) {
+            if (parseInt(grand_to[t].value))
+              grand_ssss += parseInt(grand_to[t].value);
+          }
+          document.getElementById('grand_total').value = grand_ssss;
+          var allcourse = $('.all_course').map(function () {
+            return $(this).val()
+          }).get();
+          document.getElementById('prodicat_name').value = allcourse;
+          var get_sub = document.getElementById('prodicat_name').value;
+          if (get_sub == "") {
+            document.getElementById('prodicat_name').value = "0";
+          }
+        };
+        var board = document.createElement('div');
+        board.appendChild(element6)
+        board.appendChild(element1)
+        board.appendChild(element2)
+        board.appendChild(element4)
+        board.appendChild(element5)
+        board.appendChild(element3)
+        document.getElementById('all_inputs').appendChild(board);
+      }
+    }
+
+
+    function isNumberKey(evt) {
+      var charCode = (evt.which) ? evt.which : event.keyCode
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+
+      return true;
+    }
+
+      //https://stackoverflow.com/questions/34647170/attempting-to-add-a-button-but-getting-object-htmlinputelement-instead-of-th
+  </script>
+</body>
+
+</html>

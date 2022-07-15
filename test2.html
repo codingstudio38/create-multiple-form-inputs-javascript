@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create a Form Dynamically with the JavaScript </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+    input {
+        padding: 5px;
+        margin: 5px;
+    }
+</style>
+
+<body>
+    <div class="container">
+
+
+        <div class="col-sm-12">
+            <button onClick="GFG_Fun()" class="btn btn-primary btn-block" style="margin-top: 5%;">Add New</button>
+            <form autocomplete="off" action="index.html" method="post">
+
+
+                <table width="100%" border="0" align="center">
+                    <tr>
+                        <td id="show" align="center"></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" name="btn_data" id="btn_data"
+                                class="btn btn-success btn-primary btn-block">Upload Data</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script>
+        var br = document.createElement("br");
+        function GFG_Fun() {
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "#");
+            form.setAttribute("Class", "form-inline");
+
+            var FN = document.createElement("input");
+            FN.setAttribute("type", "text");
+            FN.setAttribute("name", "FullName");
+            FN.setAttribute("placeholder", "Full Name");
+            FN.setAttribute("name", "name[]");
+            FN.setAttribute("Class", "col-sm-2 col-form-label");
+
+            var DOB = document.createElement("input");
+            DOB.setAttribute("type", "text");
+            DOB.setAttribute("name", "dob");
+            DOB.setAttribute("placeholder", "DOB");
+            DOB.setAttribute("name", "dob[]");
+            DOB.setAttribute("Class", "col-sm-2 col-form-label");
+
+            var EID = document.createElement("input");
+            EID.setAttribute("type", "text");
+            EID.setAttribute("name", "emailID");
+            EID.setAttribute("placeholder", "E-Mail ID");
+            EID.setAttribute("name", "email[]");
+            EID.setAttribute("Class", "col-sm-2 col-form-label");
+
+            var PWD = document.createElement("input");
+            PWD.setAttribute("type", "password");
+            PWD.setAttribute("name", "password");
+            PWD.setAttribute("placeholder", "Password");
+            PWD.setAttribute("name", "pass[]");
+            PWD.setAttribute("Class", "col-sm-2 col-form-label");
+
+            var RPWD = document.createElement("input");
+            RPWD.setAttribute("type", "password");
+            RPWD.setAttribute("name", "reTypePassword");
+            RPWD.setAttribute("name", "repass[]");
+            RPWD.setAttribute("placeholder", "ReEnter Password");
+            RPWD.setAttribute("Class", "col-sm-2 col-form-label");
+
+            var btn = document.createElement("input");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("value", "Remove");
+            btn.setAttribute("Class", "btn btn-danger");
+            var board = document.createElement('div');
+            board.appendChild(FN);
+            board.appendChild(DOB);
+            board.appendChild(EID);
+            board.appendChild(PWD);
+            board.appendChild(RPWD);
+            board.appendChild(btn);
+            document.getElementById("show").appendChild(board);
+        }
+    </script>
+</body>
+
+</html>
